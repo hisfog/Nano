@@ -1,0 +1,26 @@
+SET(CMAKE_BUILD_TYPE Release)
+
+PROJECT (BestHack)
+cmake_minimum_required(VERSION 3.5)
+
+add_library(readProcessMemory src/readProcessMemory.cpp)
+add_library(OffsetsManager src/OffsetsManager.cpp)
+add_library(BasicRead src/BasicRead.cpp)
+add_library(GlowEsp src/GlowEsp.cpp)
+add_library(HackManager src/HackManager.cpp)
+add_library(TriggerBot src/TriggerBot.cpp)
+add_library(BestHack src/BestHack.cpp)
+add_library(KeyBoardManager src/KeyBoardManager.cpp)
+add_library(AimBot src/AimBot.cpp)
+#add_library(MemoryScan src/MemoryScan.c)
+add_library(SkinManager src/SkinManager.cpp)
+
+add_executable(demo src/main.cpp)
+
+target_link_libraries(BasicRead readProcessMemory OffsetsManager)
+target_link_libraries(GlowEsp readProcessMemory OffsetsManager BasicRead HackManager)
+target_link_libraries(TriggerBot readProcessMemory OffsetsManager BasicRead HackManager)
+target_link_libraries(AimBot readProcessMemory OffsetsManager BasicRead HackManager)
+target_link_libraries(BestHack readProcessMemory OffsetsManager BasicRead HackManager TriggerBot KeyBoardManager SkinManager)
+#target_link_libraries(SkinManager MemoryScan)
+target_link_libraries(demo HackManager GlowEsp BestHack AimBot)
